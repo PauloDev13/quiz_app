@@ -10,6 +10,32 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   @override
   Widget build(BuildContext context) {
+    List quiz = [
+      {
+        'pergunta': 'Quem descobriu o Brasil?',
+        'respostas': [
+          'Pero Vaz de Caminha',
+          'Pedro Álvares Cabral',
+          'Vasco da Gama',
+          'Cristovam Colombo',
+        ],
+        'alternativa_correta': 2,
+      },
+    ];
+
+    quiz.add({
+      'pergunta': 'Quem descobriu as Américas?',
+      'respostas': [
+        'Cristovam Colombo',
+        'Vasco da Gama',
+        'Pedro Álvares Cabral',
+        'Pero Vaz de Caminha',
+      ],
+      'alternativa_correta': 1,
+    });
+
+    int perguntaNumero = 1;
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -28,18 +54,23 @@ class _QuizState extends State<Quiz> {
             children: <Widget>[
               Align(
                 alignment: Alignment.topRight,
-                child: Text('Pergunta 1 de 10', style: TextStyle(fontSize: 20)),
+                child: Text(
+                  'Pergunta $perguntaNumero de ${quiz.length}',
+                  style: TextStyle(fontSize: 20),
+                ),
               ),
-              Text('Pergunta', style: TextStyle(fontSize: 20)),
+              Text(
+                'Pergunta:\n ${quiz[perguntaNumero - 1]['pergunta']}',
+                style: TextStyle(fontSize: 20),
+              ),
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                   padding: EdgeInsets.all(10),
-                  fixedSize: Size(200, 60),
                 ),
                 child: Text(
-                  'Resposta 1',
+                  '${quiz[perguntaNumero - 1]['respostas'][0]}',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
@@ -48,10 +79,9 @@ class _QuizState extends State<Quiz> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                   padding: EdgeInsets.all(10),
-                  fixedSize: Size(200, 60),
                 ),
                 child: Text(
-                  'Resposta 2',
+                  '${quiz[perguntaNumero - 1]['respostas'][1]}',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
@@ -60,10 +90,9 @@ class _QuizState extends State<Quiz> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                   padding: EdgeInsets.all(10),
-                  fixedSize: Size(200, 60),
                 ),
                 child: Text(
-                  'Resposta 3',
+                  '${quiz[perguntaNumero - 1]['respostas'][2]}',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
@@ -72,10 +101,9 @@ class _QuizState extends State<Quiz> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blueAccent,
                   padding: EdgeInsets.all(10),
-                  fixedSize: Size(200, 60),
                 ),
                 child: Text(
-                  'Resposta 4',
+                  '${quiz[perguntaNumero - 1]['respostas'][3]}',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
