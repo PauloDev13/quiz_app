@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/pages/resultado.dart';
+import 'package:quiz_app/quiz_dados.dart';
 
 class Quiz extends StatefulWidget {
   const Quiz({super.key});
@@ -8,33 +10,36 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
+  int perguntaNumero = 1;
+  int acertos = 0;
+  int erros = 0;
+
   @override
   Widget build(BuildContext context) {
-    List quiz = [
-      {
-        'pergunta': 'Quem descobriu o Brasil?',
-        'respostas': [
-          'Pero Vaz de Caminha',
-          'Pedro Álvares Cabral',
-          'Vasco da Gama',
-          'Cristovam Colombo',
-        ],
-        'alternativa_correta': 2,
-      },
-    ];
+    void respondeu(int respostaNumero) {
+      setState(() {
+        if (quiz[perguntaNumero - 1]['alternativa_correta'] == respostaNumero) {
+          debugPrint('Acertou');
+          acertos++;
+        } else {
+          debugPrint('Errou');
+          erros++;
+        }
 
-    quiz.add({
-      'pergunta': 'Quem descobriu as Américas?',
-      'respostas': [
-        'Cristovam Colombo',
-        'Vasco da Gama',
-        'Pedro Álvares Cabral',
-        'Pero Vaz de Caminha',
-      ],
-      'alternativa_correta': 1,
-    });
+        debugPrint('Acertos totais: $acertos - Erros totais: $erros');
 
-    int perguntaNumero = 1;
+        if (perguntaNumero == 10) {
+          debugPrint('Quiz terminou');
+          Navigator.pushNamed(
+            context,
+            'resultado',
+            arguments: Argumentos(acertos),
+          );
+        } else {
+          perguntaNumero++;
+        }
+      });
+    }
 
     return MaterialApp(
       home: Scaffold(
@@ -63,48 +68,68 @@ class _QuizState extends State<Quiz> {
                 'Pergunta:\n ${quiz[perguntaNumero - 1]['pergunta']}',
                 style: TextStyle(fontSize: 20),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  padding: EdgeInsets.all(10),
-                ),
-                child: Text(
-                  '${quiz[perguntaNumero - 1]['respostas'][0]}',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  padding: EdgeInsets.all(10),
-                ),
-                child: Text(
-                  '${quiz[perguntaNumero - 1]['respostas'][1]}',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    respondeu(1);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: EdgeInsets.all(10),
+                  ),
+                  child: Text(
+                    '${quiz[perguntaNumero - 1]['respostas'][0]}',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  padding: EdgeInsets.all(10),
-                ),
-                child: Text(
-                  '${quiz[perguntaNumero - 1]['respostas'][2]}',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    respondeu(2);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: EdgeInsets.all(10),
+                  ),
+                  child: Text(
+                    '${quiz[perguntaNumero - 1]['respostas'][1]}',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
-                  padding: EdgeInsets.all(10),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    respondeu(3);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: EdgeInsets.all(10),
+                  ),
+                  child: Text(
+                    '${quiz[perguntaNumero - 1]['respostas'][2]}',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
-                child: Text(
-                  '${quiz[perguntaNumero - 1]['respostas'][3]}',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    respondeu(4);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.blueAccent,
+                    padding: EdgeInsets.all(10),
+                  ),
+                  child: Text(
+                    '${quiz[perguntaNumero - 1]['respostas'][3]}',
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                 ),
               ),
             ],
