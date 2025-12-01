@@ -16,6 +16,10 @@ class _QuizState extends State<Quiz> {
 
   @override
   Widget build(BuildContext context) {
+    // chama função que reordena as lista de
+    // perguntas e respostas a cada interação
+    reordenarLista();
+
     void respondeu(int respostaNumero) {
       setState(() {
         if (quiz[perguntaNumero - 1]['alternativa_correta'] == respostaNumero) {
